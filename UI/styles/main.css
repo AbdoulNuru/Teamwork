@@ -233,6 +233,93 @@ hr {
 	background-color: #164766;
 }
 
+#login-form-container {
+	box-sizing: border-box;
+	margin-top: 10%;
+}
+
+.up-logo {
+	color: #3C4858;
+	font-size: 50px;
+}
+
+#login-form-container input {
+	margin-bottom: 20px;
+}
+
+.inputs-style {
+	width: 35%;
+	height: 36px;
+	padding-top: 8px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.inputs-style:focus {
+	box-shadow: 0 0 5px #256188;
+}
+
+#login-form-container h1 {
+	margin-bottom: 20px;
+	font-size: 4em;
+	color: #3C4858;
+}
+
+.my-buttons-customized {
+	border-radius: 6px; 
+	font-size: 20px; 
+	line-height: 1.3333333;
+	padding-top: 10px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    background-color: #256188;
+    border: transparent;
+    color: #E2E2E2;
+    outline: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.my-buttons-customized:hover,
+.my-buttons-customized:active {
+	background-color: #164766;
+}
+
+#signup-form-container {
+	box-sizing: border-box;
+	margin-top: 2%;
+}
+
+#signup-form-container h1 {
+	margin-bottom: 20px;
+	font-size: 4em;
+	color: #3C4858;
+}
+
+#signup-form-container input {
+	margin-bottom: 20px;
+}
+
 .on{
 	border-bottom: 4px solid #E2E2E2;
+}
+
+.footer {
+	position: relative;
+  	left: 0;
+  	bottom: 0;
+  	width: 100%;
+  	background-color: transparent;
+  	color: #666666;
+  	text-align: center;
+  	padding: 1rem;
 }
