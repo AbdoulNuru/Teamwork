@@ -320,7 +320,11 @@ hr {
 	color: #3C4858;
 }
 
-
+#add-articles-form input,
+#add-articles-form textarea,
+#add-articles-form select {
+	margin-bottom: 20px;
+}
 
 .txt-area {
 	height: 12em;
