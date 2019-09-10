@@ -496,6 +496,34 @@ hr {
 	text-decoration: none;
 }
 
+#user-profile {
+	box-sizing: border-box;
+	margin-top: 2%;
+}
+
+#user-profile h4{
+	margin-bottom: 20px;
+	font-size: 4em;
+	color: #3C4858;
+}
+
+#user-profile label {
+	color: #4F575E;
+	font-size: 20px;
+}
+
+#user-profile img {
+	border-radius: 70px;
+}
+
+#user-profile button {
+	margin-bottom: 10px;
+} 
+
+#user-profile button:hover {
+	background-color: #CCCCCC;
+} 
+
 .on{
 	border-bottom: 4px solid #E2E2E2;
 }
