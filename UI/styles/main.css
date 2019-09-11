@@ -496,6 +496,54 @@ hr {
 	text-decoration: none;
 }
 
+.comments {
+	padding: 20px;	
+}
+
+.comments:hover {
+	box-shadow: 0 0 5px #256188;
+}
+
+.comments h1 {
+	color: #4F575E;
+}
+
+.comments p {
+	font-size: 19px;
+}
+
+.comments-div {
+	display: flex;
+}
+
+.comments-div h3 {
+	padding-right: 7px;
+}
+
+.btn-flag:active,
+.btn-flag:hover {
+	background-color: #E2E2E2;
+}
+
+.tag {
+	color: #4F575E;
+	margin-left: 3%;
+}
+
+.tag select {
+	color: #4F575E;
+	width: 15%;
+	height: 30px;
+	border: hidden;
+	background-color: transparent;
+	padding-left: 10px;
+	outline: none;
+}
+
+.tag label {
+	font-size: 20px;
+}
+
 #user-profile {
 	box-sizing: border-box;
 	margin-top: 2%;
