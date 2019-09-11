@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Cinzel&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../styles/main.css">
+    <title>Admin</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <h4><a href="adminDashboard.html"><i class="fas fa-people-carry"></i>Teamwork</a></h4>
+        </div>
+        <ul class="links">
+            <li><a class="selected on" href="adminDashboard.html">Articles</a></li>
+            <li><a class="selected" href="adminDashboard2.html">Comments</a></li>
+            <li><a class="selected" href="login.html">Log out</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <p class="own-title admn-title">All articles flagged as inappropriate</p>
+    </div>
+
+    <div id="flagged-comments">
+        <table class="table-content">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Flagged Articles</th>
+                    <th>Flagged By</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Working in team</td>
+                    <td>Guevara</td>
+                    <td><button class="story-button">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Most popular sports in the world</td>
+                    <td>Sam</td>
+                    <td><button class="story-button">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>African culture</td>
+                    <td>Doddy</td>
+                    <td><button class="story-button">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Is Messi better than Christiano</td>
+                    <td>Karen</td>
+                    <td><button class="story-button">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Classic cars</td>
+                    <td>Moise</td>
+                    <td><button class="story-button">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Teamwork &copy; 2019</p>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
