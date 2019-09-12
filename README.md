@@ -22,7 +22,7 @@ https://abdoulnuru.github.io/Teamwork/UI/index.html
 ## Optional Features
 - Employees can view all articles that belong to a category (tag). https://abdoulnuru.github.io/Teamwork/UI/views/viewAll.html
 - Employees can flag a comment, or article as inappropriate. https://abdoulnuru.github.io/Teamwork/UI/views/viewOne.html   
-- Admin can delete a comment, or article flagged as inappropriate. https://abdoulnuru.github.io/Teamwork/UI/views/adminDashboard.html 
+- Admin can delete a comment, or article flagged as inappropriate. https://abdoulnuru.github.io/Teamwork/UI/views/adminDashboard.html
 
 ## Pivotal Tracker Stories 
 [Project Stories](https://www.pivotaltracker.com/n/projects/2395459)
