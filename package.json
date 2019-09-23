@@ -1,0 +1,19 @@
+{
+  "name": "teamwork",
+  "version": "1.0.0",
+  "description": "Teamwork is an internal social network for organizations employees, the goal of this application is to facilitate more interaction between colleagues and facilitate team bonding.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdoulNuru/Teamwork.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbdoulNuru/Teamwork/issues"
+  },
+  "homepage": "https://github.com/AbdoulNuru/Teamwork#readme"
+}
