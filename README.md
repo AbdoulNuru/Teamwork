@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/AbdoulNuru/Teamwork.svg?branch=develop)](https://travis-ci.org/AbdoulNuru/Teamwork) [![Coverage Status](https://coveralls.io/repos/github/AbdoulNuru/Teamwork/badge.svg?branch=develop)](https://coveralls.io/github/AbdoulNuru/Teamwork?branch=develop)
 # Teamwork
 Teamwork is an internal social network for organizations employees, the goal of this application is to facilitate more interaction between colleagues and facilitate team bonding.
 
