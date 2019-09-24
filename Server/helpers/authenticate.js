@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 
 class Auth {
     static generateToken(email, id){
-        return jwt.sign({email, id}, process.env.SECRET);
+        return jwt.sign(
+          { email, id },
+          process.env.SECRET || "abdoulAndelaNuruKigali"
+        );
     }
 
     static hashPassword(password){
