@@ -2,7 +2,7 @@ import Hapi from '@hapi/joi';
 
 const validation = (employee)=>{
     let Schema = Hapi.object({
-        id:         Hapi.required(),
+        id:         Hapi.number().required(),
         firstname:  Hapi.string().required(),
         lastname:   Hapi.string().required(),
         email:      Hapi.string().required(),
