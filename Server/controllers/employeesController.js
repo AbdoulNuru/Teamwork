@@ -30,6 +30,33 @@ class employeeController{
             });
         }
     }
+
+    static login(req, res){
+        const account = employees.find(acc => acc.email === req.body.email);
+        if(!account){
+            return res.status(401).json({
+                status: 401,
+                error: 'It seems like you don\'t have an account, signup instead!!'
+            });
+        }else{
+            const verifyPassword = Auth.checkPassword(
+              req.body.password,
+              account.password
+            );
+            if(verifyPassword){
+                return res.status(200).json({
+                    status: 200,
+                    message: 'You have successfully logged in',
+                    token: Auth.generateToken(account.email, account.id)
+                });
+            }else{
+                res.status(401).json({
+                    status: 401,
+                    error: 'Authentication failed'
+                });
+            }
+        }
+    }
 }
 
 export default employeeController;
