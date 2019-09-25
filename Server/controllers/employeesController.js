@@ -8,8 +8,8 @@ class employeeController{
         let {error} = validation(employee(req));
 
         if(error){
-            return res.status(422).json({
-                status: 422,
+            return res.status(400).json({
+                status: 400,
                 error: error.details[0].message.replace(/"/g, "")
             });
         }
@@ -25,8 +25,16 @@ class employeeController{
             res.status(201).json({
                 status: 201,
                 message: 'User created successfully',
-                data: employee(req),
-                token: Auth.generateToken(employee.email, employee.id)
+                data: {
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    email: req.body.email,
+                    gender: req.body.gender,
+                    jobRole: req.body.jobRole,
+                    department: req.body.department,
+                    address: req.body.address
+                },
+                token: Auth.generateToken(req.body.email, employees.length)
             });
         }
     }

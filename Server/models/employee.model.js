@@ -3,7 +3,7 @@ import auth from '../helpers/authenticate'
 
 const employee = (req)=>{
         const employee = {
-            id:         (employees.length + 1) -1 ,
+            id:         employees.length + 1,
             firstname:  req.body.firstname,
             lastname:   req.body.lastname,
             email:      req.body.email,

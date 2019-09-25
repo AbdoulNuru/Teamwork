@@ -5,6 +5,12 @@ import app from '../app';
 Chai.should();
 Chai.use(chaiHttp);
 
+const employeeToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZXZhcmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2OTQ1MDIzNX0.dBOpBVjapT-nuuD79gIkrzY19Odol1ggmk7uyu5pJwg";
+const employeeWrongToken =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZXZhcmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2OTQ1MDIzNX0.dBOpBVjapT-nuD79gIkrzY19Odol1ggmk7uyu5pJwg";
+const employeeWrongToken2 =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Njk0NTE4Mjl9.0qi7aEjAjBQPIondJbmaXIpBvlglfwY2VyuGNZE0nAo";
 const emp = {
     id: 10,
     firstname: "Nuru",
@@ -40,6 +46,15 @@ const emp3 = {
     address: "KK 390 st"
 };
 
+const article = {
+  title: 'Javascript best practices',
+  article: 'Lorem Ipsum is simply dummy text of the printing.',
+};
+const article2 = {
+  title: 2,
+  article: "Lorem Ipsum is simply dummy text of the printing."
+};
+
 describe('Teamwork', ()=>{
     it('should create a new user account', (done)=>{
         Chai.request(app)
@@ -71,7 +86,7 @@ describe('Teamwork', ()=>{
             .post('/api/v1/auth/signup')
             .send(emp3)
             .end((err, res) => {
-                res.should.have.status(422);
+                res.should.have.status(400);
                 res.body.should.have.property('error');
                 done();
             });
@@ -115,6 +130,73 @@ describe('Teamwork', ()=>{
                 res.body.should.have.property("error", "Authentication failed");
               done();  
             });
+    });
+
+    it('should create a new article if a user is logged in', (done)=>{
+        Chai.request(app)
+            .post('/api/v1/articles')
+            .set('Authorization', 'Bearer '+ employeeToken)
+            .send(article)
+            .end((err, res)=>{
+                res.should.have.status(201);
+                res.body.should.have.property(
+                  "message",
+                  "article successfully created"
+                );
+                res.body.data.should.have.property(
+                  "title",
+                  "Javascript best practices"
+                );
+              done();  
+            });
+    });
+
+    it('should not create an article if a user is not logged in', (done)=>{
+        Chai.request(app)
+            .post("/api/v1/articles")
+            .set("Authorization", "Bearer " + employeeWrongToken)
+            .send(article)
+            .end((err, res)=>{
+                res.should.have.status(401);
+                res.body.should.have.property("error", "Authentication failed");
+              done();  
+            });
+    });
+
+    it("should not create an article if a user is not logged in 2", done => {
+      Chai.request(app)
+          .post("/api/v1/articles")
+          .set("Authorization", "Bearer " + employeeWrongToken2)
+          .send(article)
+          .end((err, res) => {
+               res.should.have.status(401);
+               res.body.should.have.property("error", "Authentication failed");
+            done();
+        });
+    });
+
+    it("should not create an article if there are validation errors", done => {
+      Chai.request(app)
+        .post("/api/v1/articles")
+        .set("Authorization", "Bearer " + employeeToken)
+        .send(article2)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.have.property("error");
+          done();
+        });
+    });
+
+    it("should not create an article if it already exist", done => {
+      Chai.request(app)
+        .post("/api/v1/articles")
+        .set("Authorization", "Bearer " + employeeToken)
+        .send(article)
+        .end((err, res) => {
+          res.should.have.status(409);
+          res.body.should.have.property("error", "The article already exist");
+          done();
+        });
     });
 });
 

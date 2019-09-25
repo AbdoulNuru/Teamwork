@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import authRoutes from './routes/auth.route';
+import articleRoutes from './routes/articles.route';
 
 dotenv.config();
 
@@ -12,5 +13,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(authRoutes);
+app.use(articleRoutes);
 
 export default app;
