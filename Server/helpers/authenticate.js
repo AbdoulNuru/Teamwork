@@ -5,7 +5,7 @@ class Auth {
     static generateToken(email, id){
         return jwt.sign(
           { email, id },
-          process.env.SECRET || "abdoulAndelaNuruKigali"
+          process.env.SECRET
         );
     }
 

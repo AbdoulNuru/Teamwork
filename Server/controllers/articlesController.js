@@ -5,7 +5,6 @@ import validation from '../helpers/articleValidation';
 class articlesController{
     static createArticle(req, res){
         let {error} = validation(article(req));
-
         if(error){
             return res.status(400).json({
                 status: 400,
@@ -15,7 +14,6 @@ class articlesController{
 
         const articleExist = articles.find(
             article => article.title === req.body.title);
-        
         if(articleExist){
             res.status(409).json({
                 status: 409,
@@ -34,6 +32,30 @@ class articlesController{
                 }
             });
         }    
+    }
+
+    static modifyArticle(req, res){
+        const id = parseInt(req.params.id, 10);
+        const userId = req.user.id;
+        const article = articles.find(article => article.id === id);
+
+            if(article && userId === article.createdBy){
+                article.title = req.body.title
+                article.article = req.body.article
+
+                return res.status(200).json({
+                    status: 200,
+                    message: 'article successfully edited',
+                    data: {
+                        title: article.title,
+                        article: article.article
+                    }
+                });
+            }
+        res.status(404).json({
+            status: 404,
+            error: 'No article found with given id'
+        });
     }
 }
 
