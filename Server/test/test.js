@@ -50,6 +50,12 @@ const article = {
   title: 'Javascript best practices',
   article: 'Lorem Ipsum is simply dummy text of the printing.',
 };
+
+const articleUpdate = {
+  title: "New article",
+  article: "Lorem Ipsum is simply dummy text."
+};
+
 const article2 = {
   title: 2,
   article: "Lorem Ipsum is simply dummy text of the printing."
@@ -163,7 +169,7 @@ describe('Teamwork', ()=>{
             });
     });
 
-    it("should not create an article if a user is not logged in 2", done => {
+    it('should not create an article if a user is not logged in 2', (done) => {
       Chai.request(app)
           .post("/api/v1/articles")
           .set("Authorization", "Bearer " + employeeWrongToken2)
@@ -175,7 +181,7 @@ describe('Teamwork', ()=>{
         });
     });
 
-    it("should not create an article if there are validation errors", done => {
+    it('should not create an article if there are validation errors', (done) => {
       Chai.request(app)
         .post("/api/v1/articles")
         .set("Authorization", "Bearer " + employeeToken)
@@ -187,7 +193,7 @@ describe('Teamwork', ()=>{
         });
     });
 
-    it("should not create an article if it already exist", done => {
+    it('should not create an article if it already exist', (done) => {
       Chai.request(app)
         .post("/api/v1/articles")
         .set("Authorization", "Bearer " + employeeToken)
@@ -195,6 +201,56 @@ describe('Teamwork', ()=>{
         .end((err, res) => {
           res.should.have.status(409);
           res.body.should.have.property("error", "The article already exist");
+          done();
+        });
+    });
+
+    it('should edit an existing article', (done)=>{
+      Chai.request(app)
+          .patch('/api/v1/articles/'+ 1)
+          .set('Authorization', 'Bearer '+ employeeToken)
+          .send(articleUpdate)
+          .end((err, res)=>{
+            res.should.have.status(200);
+            res.body.should.have.property(
+              'message',
+              'article successfully edited'
+            );
+            res.body.data.should.have.property('title', 'New article');
+          done();  
+          });
+    });
+
+    it("should edit an existing article 2", done => {
+      Chai.request(app)
+        .patch("/api/v1/articles/" + 1)
+        .set("Authorization", "Bearer " + employeeToken)
+        .send(article)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property(
+            "message",
+            "article successfully edited"
+          );
+          res.body.data.should.have.property(
+            "title",
+            "Javascript best practices"
+          );
+          done();
+        });
+    });
+
+    it("should not edit an article that don't exist", done => {
+      Chai.request(app)
+          .patch("/api/v1/articles/" + 100)
+          .set("Authorization", "Bearer " + employeeToken)
+          .send(articleUpdate)
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.have.property(
+              "error",
+              "No article found with given id"
+            );
           done();
         });
     });
