@@ -255,6 +255,39 @@ describe('Teamwork', ()=>{
         });
     });
 
+    it("should comment on colleagues articles", done => {
+      const id = 1;
+      Chai.request(app)
+        .post("/api/v1/articles/" + id + "/comments")
+        .set("Authorization", "Bearer " + employeeToken)
+        .send({ comment: "Good article" })
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.have.property(
+            "message",
+            "comment added successfully"
+          );
+          res.body.data.should.have.property(
+            "comment",
+            "Good article"
+          );
+          done();
+        });
+    });
+
+    it("should not comment on colleagues articles\
+        if there is a validation error", done => {
+      const id = 1;
+      Chai.request(app)
+        .post("/api/v1/articles/" + id + "/comments")
+        .set("Authorization", "Bearer " + employeeToken)
+        .send()
+        .end((err, res) => {
+          res.should.have.status(400);
+        done();
+        });
+    });
+
     it('should delete an article i created if am logged in', (done)=>{
       const id = 1;
       Chai.request(app)
@@ -264,6 +297,22 @@ describe('Teamwork', ()=>{
             res.should.have.status(204);
           done();  
           });
+    });
+
+    it("should not comment on unexisting article", done => {
+      const id = 1;
+      Chai.request(app)
+        .post("/api/v1/articles/" + id + "/comments")
+        .set("Authorization", "Bearer " + employeeToken)
+        .send({ comment: "Good article" })
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.have.property(
+            "error",
+            "you can't comment on unexisting article!"
+          );
+        done();
+        });
     });
 
     it("should not delete an article if am not logged in or\
