@@ -6,11 +6,11 @@ Chai.should();
 Chai.use(chaiHttp);
 
 const employeeToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZXZhcmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2OTQ1MDIzNX0.dBOpBVjapT-nuuD79gIkrzY19Odol1ggmk7uyu5pJwg";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZXZhcmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2OTU5ODIwNH0.OHD6tBY1uv_4U2y0r-uDBvfgAkg80Ex1ZTiJZAZS-dc";
 const employeeWrongToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imd1ZXZhcmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU2OTQ1MDIzNX0.dBOpBVjapT-nuD79gIkrzY19Odol1ggmk7uyu5pJwg";
 const employeeWrongToken2 =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Njk0NTE4Mjl9.0qi7aEjAjBQPIondJbmaXIpBvlglfwY2VyuGNZE0nAo";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Njk1OTg3OTh9.OJlBy5WLiKA68NIQyG96IeykzN4vwil6gRsa1GsRNO8";
 const emp = {
     id: 10,
     firstname: "Nuru",
@@ -254,5 +254,32 @@ describe('Teamwork', ()=>{
           done();
         });
     });
+
+    it('should delete an article i created if am logged in', (done)=>{
+      const id = 1;
+      Chai.request(app)
+          .delete('/api/v1/articles/'+ id)
+          .set('Authorization', 'Bearer '+ employeeToken)
+          .end((err, res) => {
+            res.should.have.status(204);
+          done();  
+          });
+    });
+
+    it("should not delete an article if am not logged in or\
+        don't own the article am trying to delete", (done) => {
+          const id = 100;
+          Chai.request(app)
+              .delete('/api/v1/articles/'+ id)
+              .set('Authorization', 'Bearer '+ employeeToken)
+              .end((err, res)=>{
+                res.should.have.status(404);
+                res.body.should.have.property(
+                  "error",
+                  "No article found with given id"
+                );
+              done();  
+              });
+        });
 });
 
