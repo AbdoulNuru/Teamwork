@@ -74,6 +74,23 @@ class articlesController {
       error: "No article found with given id"
     });
   }
+
+  static viewAllArticles(req, res){
+    const sorted = articles.sort((x, y)=> 
+                   new Date(y.createdOn) - new Date(x.createdOn));
+    if(sorted.length === 0){
+      return res.status(200).json({
+        status: 200,
+        message: 'It seems like there are no articles added yet!!'
+      });
+    } else{
+      res.status(200).json({
+        status: 200,
+        message: "Articles successfully retrieved",
+        data: sorted
+      });
+    }              
+  }
 }
 
 export default articlesController;

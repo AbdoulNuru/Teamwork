@@ -138,6 +138,20 @@ describe('Teamwork', ()=>{
             });
     });
 
+    it("should get all articles, showing the most recent first 2", done => {
+      Chai.request(app)
+        .get("/api/v1/feeds")
+        .set("Authorization", "Bearer " + employeeToken)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property(
+            "message",
+            "It seems like there are no articles added yet!!"
+          );
+        done();
+        });
+    });
+
     it('should create a new article if a user is logged in', (done)=>{
         Chai.request(app)
             .post('/api/v1/articles')
@@ -273,6 +287,21 @@ describe('Teamwork', ()=>{
           );
           done();
         });
+    });
+
+    it('should get all articles, showing the most recent first 1', (done)=>{
+      Chai.request(app)
+          .get('/api/v1/feeds')
+          .set('Authorization', 'Bearer '+ employeeToken)
+          .end((err, res)=>{
+            res.should.have.status(200);
+            res.body.should.have.property(
+              "message",
+              "Articles successfully retrieved"
+            );
+            res.body.data[0].should.have.property('id');
+          done();  
+          });
     });
 
     it("should not comment on colleagues articles\
