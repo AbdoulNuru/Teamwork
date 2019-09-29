@@ -4,7 +4,7 @@ const comment = (req) => {
     const comment = {
       id: comments.length + 1,
       comment: req.body.comment,
-      articleId: req.params.articleId,
+      articleId: parseInt(req.params.articleId, 10),
       commentedBy: req.user.id,
       createdOn: new Date().toDateString()
     };
