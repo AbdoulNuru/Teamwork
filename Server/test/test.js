@@ -304,6 +304,18 @@ describe('Teamwork', ()=>{
           });
     });
 
+    it("should get a specific article", done => {
+      const id = 1
+      Chai.request(app)
+        .get("/api/v1/articles/"+ id)
+        .set("Authorization", "Bearer " + employeeToken)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.data.should.be.a('object');
+          done();
+        });
+    });
+
     it("should not comment on colleagues articles\
         if there is a validation error", done => {
       const id = 1;
@@ -317,6 +329,17 @@ describe('Teamwork', ()=>{
         });
     });
 
+    it("should not allow wrong urls", done => {
+      const id = 1;
+      Chai.request(app)
+        .delete("/api/v21/articles/" + id)
+        .set("Authorization", "Bearer " + employeeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+
     it('should delete an article i created if am logged in', (done)=>{
       const id = 1;
       Chai.request(app)
@@ -326,6 +349,21 @@ describe('Teamwork', ()=>{
             res.should.have.status(204);
           done();  
           });
+    });
+
+    it("should not get a specific article, if doesn't exist", done => {
+      const id = 1;
+      Chai.request(app)
+        .get("/api/v1/articles/" + id)
+        .set("Authorization", "Bearer " + employeeToken)
+        .end((err, res) => {
+          res.should.have.status(404);
+          res.body.should.have.property(
+            "error",
+            "No article found with the given id"
+          );
+          done();
+        });
     });
 
     it("should not comment on unexisting article", done => {

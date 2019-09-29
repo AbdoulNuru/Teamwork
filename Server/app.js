@@ -17,4 +17,20 @@ app.use(authRoutes);
 app.use(articleRoutes);
 app.use(commentRoutes);
 
+app.use((req, res, next) => {
+  const error = new Error("There was an error");
+  error.status = 404;
+  next(error);
+});
+
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+  res.status(error.status);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
+});
+
 export default app;
