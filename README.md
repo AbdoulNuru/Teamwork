@@ -38,7 +38,7 @@ https://abdoulnuru.github.io/Teamwork/UI/index.html
 | /api/v1/articles/:articleId          | GET     | users can view a specific article|
 
 ## Api Documentation
-[Documentation](https://web.postman.co/collections/8960332-c389a896-fb23-4d3a-b5b6-9a313c2c1bc6?version=latest&workspace=8f86e689-ecec-4e31-8b13-41a7832e1ba8)
+[Documentation](https://documenter.getpostman.com/view/8960332/SVtPXB2b)
 
 ## Pivotal Tracker Stories 
 [Project Stories](https://www.pivotaltracker.com/n/projects/2395459)
