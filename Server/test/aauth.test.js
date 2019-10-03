@@ -41,6 +41,16 @@ const emp3 = {
 };
 
 describe('Teamwork User', ()=>{
+    it("should welcome a users", done => {
+      Chai.request(app)
+        .get("/")
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.have.property("message", "Welcome to Teamwork");
+          done();
+        });
+    });
+
     it("should create a new user account", done => {
       Chai.request(app)
         .post("/api/v1/auth/signup")
