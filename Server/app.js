@@ -14,9 +14,13 @@ const port = process.env.PORT;
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 app.use('/api/v1', authRoutes);
 app.use('/api/v1', articleRoutes);
 app.use('/api/v1', commentRoutes);
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to Teamwork" });
+});
 
 app.use((req, res, next) => {
   const error = new Error("There was an error");
