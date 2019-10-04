@@ -140,7 +140,8 @@ nav{
 
 	#add-articles-form input,
 	#add-articles-form select,
-	#add-articles-form textarea {
+	#add-articles-form textarea,
+	#add-articles-form p{
 		width: 100%;
 	}
 
@@ -154,6 +155,10 @@ nav{
 
 	#btn2-small{
 		width: 100%;
+	}
+
+	#artar-small{
+		margin-left: 0%;
 	}
 }
 
@@ -844,6 +849,13 @@ table button:hover {
 
 .on{
 	border-bottom: 4px solid #E2E2E2;
+}
+
+.article-area{
+	font-size: 20px;
+	padding: 5px;
+	width: 45%;
+	margin-left: 27.5%;
 }
 
 .footer {
