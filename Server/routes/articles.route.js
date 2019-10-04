@@ -3,11 +3,11 @@ import articlesController from '../controllers/articlesController';
 import isLoggedIn from '../middlewares/isLoggedIn';
 
 const routes = Router();
-
-routes.post('/api/v1/articles', isLoggedIn, articlesController.createArticle);
-routes.patch('/api/v1/articles/:id', isLoggedIn, articlesController.modifyArticle);
-routes.delete('/api/v1/articles/:id', isLoggedIn, articlesController.deleteArticle);
-routes.get('/api/v1/feeds', isLoggedIn, articlesController.viewAllArticles);
-routes.get('/api/v1/articles/:id', isLoggedIn, articlesController.viewSpecificArticle);
+//routes.all('*', isLoggedIn)
+routes.post('/articles', isLoggedIn, articlesController.createArticle);
+routes.patch("/articles/:id", isLoggedIn, articlesController.modifyArticle);
+routes.delete('/articles/:id', isLoggedIn, articlesController.deleteArticle);
+routes.get("/feeds", isLoggedIn, articlesController.viewAllArticles);
+routes.get("/articles/:id", isLoggedIn, articlesController.viewSpecificArticle);
 
 export default routes;

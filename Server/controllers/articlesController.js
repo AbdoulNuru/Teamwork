@@ -91,10 +91,10 @@ class articlesController {
 
   static viewSpecificArticle(req, res){
     const artId = parseInt(req.params.id, 10);
-    const artFound = articles.find(a => a.id === artId);
+    const Article = articles.find(a => a.id === artId);
     let artComments = comments.filter(c => c.articleId === artId);
 
-    if(!artFound){
+    if(!Article){
       return res.status(404).json({
         status: 404,
         error: 'No article found with the given id'
@@ -102,8 +102,10 @@ class articlesController {
     }else{
       res.status(200).json({
         status: 200,
-        data: artFound,
-        comments: artComments
+        data: {
+          Article,
+          comments: artComments
+        } 
       });
     }
   }

@@ -9,13 +9,18 @@ import commentRoutes from './routes/comments.route';
 dotenv.config();
 
 const app = express();
+const port = process.env.PORT;
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(authRoutes);
-app.use(articleRoutes);
-app.use(commentRoutes);
+
+app.use('/api/v1', authRoutes);
+app.use('/api/v1', articleRoutes);
+app.use('/api/v1', commentRoutes);
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to Teamwork" });
+});
 
 app.use((req, res, next) => {
   const error = new Error("There was an error");
@@ -31,6 +36,10 @@ app.use((error, req, res, next) => {
       message: error.message
     }
   });
+});
+
+app.listen(port, () => {
+  console.log(`Teamwork Server running on ${port}`);
 });
 
 export default app;
