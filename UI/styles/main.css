@@ -2,6 +2,7 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
+	text-decoration: none;
 }
 
 body {
@@ -98,7 +99,7 @@ nav{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 30%;
+		width: 100%;
 		transform: translateX(100%);
 		transition: transform 0.5s ease-in;
 	}
@@ -159,6 +160,10 @@ nav{
 
 	#artar-small{
 		margin-left: 0%;
+	}
+
+	#str-cmtn{
+		float: none;
 	}
 }
 
@@ -379,6 +384,10 @@ hr {
 	margin-top: 5%;
 }
 
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+
 #add-articles-form h1 {
 	margin-bottom: 20px;
 	font-size: 4em;
@@ -395,6 +404,19 @@ hr {
 	height: 12em;
     min-height: 8em;
     max-height: 24em;
+}
+
+#comment-area {
+	height: 3em;
+    min-height: 3em;
+	max-height: 10em;
+	width: 70%;
+	border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #ccc;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	padding: 4px;
 }
 
 .txt-area2 {
@@ -488,7 +510,6 @@ hr {
   border: 1px solid #d3d3d3;
   border-radius: .25rem;
   box-shadow: 0 0 5px #256188;
-  cursor: pointer;
 }
 
 .story-image {	
@@ -517,6 +538,7 @@ hr {
 .story-content h3 {
 	color: #4F575E;
 	padding-top: 10px;
+	padding-bottom: 5px;
 }
 
 .story-content p {
@@ -560,6 +582,20 @@ hr {
   font-size: 20px;
   font-family: "Times New Roman";
   color: #ffffff;
+}
+
+.story-button-edit2 {
+  background-color: #f39300;
+  border: 1px solid #f39300;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  border-radius: .25rem;
+  outline: none;
+  margin-top: 3px;
+  font-size: 15px;
+  font-family: "Times New Roman";
+  color: #ffffff;
+  float: right;
 }
 
 .story-button-delete {
@@ -633,7 +669,8 @@ hr {
 	background-color: #1667a8;
 }
 
-.story-button-edit:hover{
+.story-button-edit:hover,
+.story-button-edit2:hover{
 	background-color: #c77e0e;
 }
 
@@ -733,6 +770,7 @@ hr {
 
 .comments-div {
 	display: flex;
+	margin-bottom: 2%;
 }
 
 .comments-div h3 {
@@ -856,6 +894,7 @@ table button:hover {
 	padding: 5px;
 	width: 45%;
 	margin-left: 27.5%;
+	box-shadow: 0 0 5px #256188;
 }
 
 .footer {
