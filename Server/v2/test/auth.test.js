@@ -13,6 +13,7 @@ const emp = {
   email: 'karen@gmail.com',
   password: 'karen123',
   gender: 'Female',
+  jobRole: 'Consultant',
   department: 'IT',
   address: 'KG 234 st'
 };

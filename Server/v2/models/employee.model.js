@@ -7,6 +7,7 @@ const employee = req => {
     email: req.body.email,
     password: auth.hashPassword(req.body.password),
     gender: req.body.gender,
+    jobRole: req.body.jobRole,
     department: req.body.department,
     address: req.body.address
   };

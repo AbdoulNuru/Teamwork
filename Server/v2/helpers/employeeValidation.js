@@ -9,6 +9,7 @@ const validation = employee => {
       .required(),
     password: Hapi.string().required(),
     gender: Hapi.string().required(),
+    jobRole: Hapi.string().required(),
     department: Hapi.string().required(),
     address: Hapi.string().required()
   });

@@ -22,6 +22,7 @@ class employeeController {
       lastname,
       email,
       gender,
+      jobRole,
       department,
       address
     } = req.body;
@@ -35,6 +36,7 @@ class employeeController {
       email,
       password,
       gender,
+      jobRole,
       department,
       address
     ]);

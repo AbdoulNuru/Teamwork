@@ -6,6 +6,7 @@ const userTable = `
                 email text UNIQUE,
                 password text,
                 gender text,
+                jobRole text,
                 department text,
                 address text)`;
 
