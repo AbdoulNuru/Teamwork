@@ -585,7 +585,7 @@ hr {
   border-radius: .25rem;
   outline: none;
   margin-top: 10px;
-  font-size: 20px;
+  font-size: 17px;
   font-family: "Times New Roman";
   color: #ffffff;
 }
@@ -852,7 +852,7 @@ hr {
 }
 
 .table-content th,
-.table-content td {
+.table-content td{
 	padding: 12px 15px;
 }
 
@@ -871,6 +871,52 @@ hr {
 .table-content tbody tr.active-row {
 	font-weight: bold;
 	color: #009879;
+}
+
+.table-content-2 {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	overflow: hidden;
+	border-radius: 5px 5px 0 0;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	min-width: 600px;
+}
+
+.table-content-2 thead tr {
+	background-color: #256188;
+	color: #E2E2E2;
+	text-align: left;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.table-content-2 th,
+.table-content-2 td{
+	padding: 12px 15px;
+}
+
+.table-content-2 tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.table-content-2 tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.table-content-2 tbody tr:last-of-type {
+	border-bottom: 2px solid #256188;
+}
+
+.table-content-2 tbody tr.active-row {
+	font-weight: bold;
+	color: #009879;
+}
+
+#user-info{
+	margin-left: 27%;
+	margin-right: 10%;
+	overflow-x: auto;
 }
 
 #flagged-comments {
