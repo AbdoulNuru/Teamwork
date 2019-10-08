@@ -827,6 +827,7 @@ hr {
 
 #user-profile img {
 	border-radius: 70px;
+	height: 250px;
 }
 
 #user-profile button {
