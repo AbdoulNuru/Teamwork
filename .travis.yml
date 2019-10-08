@@ -1,5 +1,12 @@
 language: node_js
 node_js: 
-  - "stable"  
+  - "stable"
+services:
+  - postgresql  
+before_script:
+  - psql -c 'create database Teamwork_Testing;' -U postgres
+cache: npm
+script: 
+  - npm run test    
 after_success:
   - npm run coveralls
