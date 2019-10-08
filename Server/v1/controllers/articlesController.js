@@ -1,3 +1,7 @@
+/* eslint-disable no-shadow */
+/* eslint-disable prefer-const */
+/* eslint-disable consistent-return */
+
 import articles from '../models/article.db';
 import article from '../models/article.model';
 import articleValidation from '../helpers/articleValidation';
@@ -9,24 +13,27 @@ class articlesController {
     if (error) {
       return res.status(400).json({
         status: 400,
-        error: error.details[0].message.replace(/"/g, "")
+        error: error.details[0].message.replace(/"/g, '')
       });
     }
-    
     const articleExist = articles.find(
-      article => article.title === req.body.title );
+      article => article.title === req.body.title
+    );
     if (articleExist) {
       res.status(409).json({
         status: 409,
-        error: "The article already exist"
+        error: 'The article already exist'
       });
     } else {
       articles.push(article(req));
       const art = articles.find(art => art.id === articles.length);
-      res.status(201).json({ status: 201,
-        message: "article successfully created",
+      res.status(201).json({
+        status: 201,
+        message: 'article successfully created',
         data: {
-          createdOn: art.createdOn, title: art.title, article: art.article
+          createdOn: art.createdOn,
+          title: art.title,
+          article: art.article
         }
       });
     }
@@ -43,7 +50,7 @@ class articlesController {
 
       return res.status(200).json({
         status: 200,
-        message: "article successfully edited",
+        message: 'article successfully edited',
         data: {
           title: article.title,
           article: article.article
@@ -52,12 +59,12 @@ class articlesController {
     }
     res.status(404).json({
       status: 404,
-      error: "No article found with given id"
+      error: 'No article found with given id'
     });
   }
 
   static deleteArticle(req, res) {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id, 10);
     const createdBy = req.user.id;
     const articleExist = articles.find(article => article.id === id);
 
@@ -68,46 +75,46 @@ class articlesController {
 
     res.status(404).json({
       status: 404,
-      error: "No article found with given id"
+      error: 'No article found with given id'
     });
   }
 
-  static viewAllArticles(req, res){
-    const sorted = articles.sort((x, y)=> 
-                   new Date(y.createdOn) - new Date(x.createdOn));
-    if(sorted.length === 0){
+  static viewAllArticles(req, res) {
+    // eslint-disable-next-line prettier/prettier
+    const sorted = articles.sort((x, y) => 
+    new Date(y.createdOn) - new Date(x.createdOn)
+    );
+    if (sorted.length === 0) {
       return res.status(200).json({
         status: 200,
         message: 'It seems like there are no articles added yet!!'
       });
-    } else{
-      res.status(200).json({
-        status: 200,
-        message: "Articles successfully retrieved",
-        data: sorted
-      });
-    }              
+    }
+    res.status(200).json({
+      status: 200,
+      message: 'Articles successfully retrieved',
+      data: sorted
+    });
   }
 
-  static viewSpecificArticle(req, res){
+  static viewSpecificArticle(req, res) {
     const artId = parseInt(req.params.id, 10);
     const Article = articles.find(a => a.id === artId);
     let artComments = comments.filter(c => c.articleId === artId);
 
-    if(!Article){
+    if (!Article) {
       return res.status(404).json({
         status: 404,
         error: 'No article found with the given id'
       });
-    }else{
-      res.status(200).json({
-        status: 200,
-        data: {
-          Article,
-          comments: artComments
-        } 
-      });
     }
+    res.status(200).json({
+      status: 200,
+      data: {
+        Article,
+        comments: artComments
+      }
+    });
   }
 }
 
