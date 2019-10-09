@@ -65,4 +65,35 @@ describe('Teamwork with database', () => {
         done();
       });
   });
+
+  it('Should login a user with an account', done => {
+    Chai.request(app)
+      .post('/api/v2/auth/signin')
+      .send({ email: emp.email, password: emp.password })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          `${emp.email} is successfully logged in`
+        );
+        res.body.should.have.property('token');
+        res.body.data.should.have.property('email', emp.email);
+        res.body.data.should.have.property('firstname', emp.firstname);
+        done();
+      });
+  });
+
+  it('Should not login a user without an accoun or  with an incorrect password', done => {
+    Chai.request(app)
+      .post('/api/v2/auth/signin')
+      .send({ email: 'kghh@gmail.com', password: 'karen123' })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property(
+          'error',
+          "It seems like you don't have an account, sign up instead"
+        );
+        done();
+      });
+  });
 });

@@ -56,6 +56,33 @@ class employeeController {
       error: 'Email already exist!!'
     });
   }
+
+  static async userLogin(req, res) {
+    const { email, password } = req.body;
+
+    const exist = await conn.query(userQuery.findOneLogin, [email]);
+    const display = await conn.query(userQuery.findOneLgn, [email]);
+
+    if (exist.rowCount > 0) {
+      const compare = help1.checkPassword(password, exist.rows[0].password);
+      if (compare) {
+        return res.status(200).json({
+          status: 200,
+          message: `${exist.rows[0].email} is successfully logged in`,
+          token: help1.generateToken(
+            exist.rows[0].email,
+            exist.rows[0].employeeId
+          ),
+          data: display.rows[0]
+        });
+      }
+    }
+
+    return res.status(404).json({
+      status: 404,
+      error: "It seems like you don't have an account, sign up instead"
+    });
+  }
 }
 
 export default employeeController;

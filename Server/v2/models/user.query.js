@@ -12,5 +12,8 @@ const createUser = ` insert into employee (
 
 const findOne = `select employeeId, firstname, lastname, email, gender, 
             jobRole, department, address from employee where email=($1)`;
-
-export default { createUser, findOne };
+const findOneLogin = `select employeeId, firstname, email, password, 
+            jobRole, department, address from employee where email=($1)`;
+const findOneLgn = `select employeeId, firstname, email, jobRole, 
+            department, address from employee where email=($1)`;
+export default { createUser, findOne, findOneLogin, findOneLgn };
