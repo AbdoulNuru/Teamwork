@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import moment from 'moment';
 import conn from '../config/project.config';
 import articleQuery from '../models/article.query';
@@ -40,6 +39,8 @@ class articleController {
         author: author.rows[0]
       });
     }
+
+    return addArticle;
   }
 }
 
