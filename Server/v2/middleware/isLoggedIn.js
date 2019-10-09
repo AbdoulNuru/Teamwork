@@ -23,8 +23,6 @@ const isLoggedIn = async (req, res, next) => {
       error: 'Authentication failed'
     });
   }
-
-  return isLoggedIn;
 };
 
 export default isLoggedIn;
