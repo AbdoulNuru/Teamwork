@@ -1,5 +1,4 @@
 /* eslint-disable consistent-return */
-import uuid from 'uuid/v1';
 import conn from '../config/project.config';
 import help1 from '../helpers/authenticate';
 import userQuery from '../models/user.query';
@@ -27,10 +26,8 @@ class employeeController {
       address
     } = req.body;
     const password = help1.hashPassword(req.body.password);
-    const employeeId = uuid();
 
     const add = await conn.query(userQuery.createUser, [
-      employeeId,
       firstname,
       lastname,
       email,
@@ -47,7 +44,10 @@ class employeeController {
         status: 201,
         message: 'User created successfully',
         data: saved.rows[0],
-        token: help1.generateToken(email, employeeId)
+        token: help1.generateToken(
+          saved.rows[0].email,
+          saved.rows[0].employeeid
+        )
       });
     }
 
@@ -71,7 +71,7 @@ class employeeController {
           message: `${exist.rows[0].email} is successfully logged in`,
           token: help1.generateToken(
             exist.rows[0].email,
-            exist.rows[0].employeeId
+            exist.rows[0].employeeid
           ),
           data: display.rows[0]
         });
