@@ -8,7 +8,7 @@ const createArticle = ` insert into articles (
     ) VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING returning *`;
 
 const findOneArticle = `select articleId, title, article, category, createdOn
-                        from articles where title=($1)`;
+                        from articles where articleid=($1)`;
 const findAuthor = `select employeeid, firstname, email, jobRole, department 
                     from employee where employeeid=($1)`;
 

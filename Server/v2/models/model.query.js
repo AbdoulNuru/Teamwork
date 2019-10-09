@@ -13,7 +13,7 @@ const userTable = `
 const articleTable = `
         CREATE TABLE IF NOT EXISTS articles (
                 articleId SERIAL PRIMARY KEY,
-                title text UNIQUE,
+                title text,
                 article text,
                 category text,
                 createdOn date,

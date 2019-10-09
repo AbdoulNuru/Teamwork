@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import moment from 'moment';
 import conn from '../config/project.config';
 import articleQuery from '../models/article.query';
@@ -28,7 +29,9 @@ class articleController {
     ]);
 
     if (addArticle.rowCount === 1) {
-      const added = await conn.query(articleQuery.findOneArticle, [title]);
+      const added = await conn.query(articleQuery.findOneArticle, [
+        addArticle.rows[0].articleid
+      ]);
       const author = await conn.query(articleQuery.findAuthor, [createdBy]);
       return res.status(201).json({
         status: 201,
@@ -37,11 +40,6 @@ class articleController {
         author: author.rows[0]
       });
     }
-
-    return res.status(400).json({
-      status: 400,
-      error: 'Article not created'
-    });
   }
 }
 
