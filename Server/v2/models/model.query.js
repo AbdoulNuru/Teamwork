@@ -15,7 +15,9 @@ const articleTable = `
                 articleId UUID PRIMARY KEY,
                 title text,
                 article text,
+                category text,
                 createdOn date,
+                modifiedOn date,
                 createdBy UUID,
                 foreign key(createdBy) REFERENCES employee ON DELETE CASCADE)`;
 
