@@ -1,6 +1,6 @@
 const userTable = `
     CREATE TABLE IF NOT EXISTS employee (
-                employeeId UUID PRIMARY KEY,
+                employeeId SERIAL PRIMARY KEY,
                 firstName text,
                 lastName text,
                 email text UNIQUE,
@@ -12,11 +12,13 @@ const userTable = `
 
 const articleTable = `
         CREATE TABLE IF NOT EXISTS articles (
-                articleId UUID PRIMARY KEY,
+                articleId SERIAL PRIMARY KEY,
                 title text,
                 article text,
+                category text,
                 createdOn date,
-                createdBy UUID,
+                modifiedOn date,
+                createdBy SERIAL,
                 foreign key(createdBy) REFERENCES employee ON DELETE CASCADE)`;
 
 const deleteTable = `DROP TABLE IF EXISTS employee, articles CASCADE;`;
