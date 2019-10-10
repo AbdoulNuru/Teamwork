@@ -65,6 +65,53 @@ class articleController {
       error: 'Article not found or you dont own the article'
     });
   }
+
+  static async modifyArticle(req, res) {
+    const articleId = parseInt(req.params.articleId, 10);
+    const loggedIn = req.user.employeeId;
+    const { title, article } = req.body;
+    const articleExist = await conn.query(articleQuery.findOneToUpdate, [
+      articleId
+    ]);
+
+    if (typeof title === 'undefined' || typeof article === 'undefined') {
+      return res.status(400).json({
+        status: 400,
+        error: 'The fields can not be updated to null'
+      });
+    }
+
+    const newTitle = title;
+    const newArticle = article;
+    const creator = await conn.query(articleQuery.findAuthor, [loggedIn]);
+    if (
+      articleExist.rowCount > 0 &&
+      articleExist.rows[0].createdby === loggedIn
+    ) {
+      const updated = await conn.query(articleQuery.updateArticle, [
+        newTitle,
+        newArticle,
+        articleId
+      ]);
+
+      const display1 = await conn.query(articleQuery.findOneArticle, [
+        articleId
+      ]);
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Article modified successfully',
+        data: display1.rows[0],
+        author: creator.rows[0]
+      });
+    }
+
+    return res.status(404).json({
+      status: 404,
+      error:
+        'The article you are trying to edit is not found or you do not own it'
+    });
+  }
 }
 
 export default articleController;
