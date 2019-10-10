@@ -80,33 +80,28 @@ describe('Teamwork with database', () => {
       });
   });
 
-  it('Should update an existing article', done => {
+  it('Should delete an article', done => {
     Chai.request(app)
-      .patch(`/api/v2/articles/${1}`)
+      .delete(`/api/v2/articles/${1}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({ title: 'new one', article: rt })
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property(
-          'message',
-          'Article modified successfully'
-        );
-        res.body.data.should.have.property('title', 'new one');
-        res.body.data.should.have.property('article', rt);
+        res.body.should.have.property('message', 'Article deleted');
+        res.body.data.should.have.property('articleid', 1);
+        res.body.data.should.have.property('category', 'music');
         done();
       });
   });
 
-  it('Should update an existing article', done => {
+  it("Should not delete an article that don't exist", done => {
     Chai.request(app)
-      .patch(`/api/v2/articles/${2}`)
+      .delete(`/api/v2/articles/${78}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({ title: 'new one', article: rt })
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.have.property(
           'error',
-          'The article you are trying to edit is not found or you do not own it'
+          'Article not found or you dont own the article'
         );
         done();
       });
