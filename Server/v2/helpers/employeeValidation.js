@@ -8,7 +8,9 @@ const validation = employee => {
       .email()
       .required(),
     password: Hapi.string().required(),
-    gender: Hapi.string().required(),
+    gender: Hapi.string()
+      .valid('male', 'female')
+      .required(),
     jobRole: Hapi.string().required(),
     department: Hapi.string().required(),
     address: Hapi.string().required()
