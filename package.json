@@ -4,8 +4,8 @@
   "description": "Teamwork is an internal social network for organizations employees, the goal of this application is to facilitate more interaction between colleagues and facilitate team bonding.",
   "main": "app.js",
   "scripts": {
-    "start": "npm run build && node build/app.js",
-    "build": "babel ./Server -d build",
+    "start": "npm run build && npm run createTables && node --require @babel/polyfill build/app.js",
+    "build": "babel ./Server -d build && node --require @babel/polyfill ./build/v2/models/model.createTable.js",
     "dev": "nodemon --exec babel-node ./server/app.js",
     "test": "cross-env NODE_ENV=isTesting npm run deleteTables && cross-env NODE_ENV=isTesting npm run createTables && cross-env NODE_ENV=isTesting nyc --require @babel/polyfill --require @babel/register mocha ./Server/v1/test/*.js ./Server/v2/test/*.js --exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
