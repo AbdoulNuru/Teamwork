@@ -42,6 +42,29 @@ class articleController {
 
     return addArticle;
   }
+
+  static async deleteArticle(req, res) {
+    const artId = parseInt(req.params.articleId, 10);
+    const loggedAs = req.user.employeeId;
+    const findArticle = await conn.query(articleQuery.findOneToDelete, [artId]);
+
+    if (
+      findArticle.rowCount > 0 &&
+      findArticle.rows[0].createdby === loggedAs
+    ) {
+      await conn.query(articleQuery.deleteArticle, [artId]);
+      return res.status(200).json({
+        status: 200,
+        message: 'Article deleted',
+        data: findArticle.rows[0]
+      });
+    }
+
+    return res.status(404).json({
+      status: 404,
+      error: 'Article not found or you dont own the article'
+    });
+  }
 }
 
 export default articleController;

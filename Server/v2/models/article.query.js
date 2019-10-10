@@ -9,7 +9,16 @@ const createArticle = ` insert into articles (
 
 const findOneArticle = `select articleId, title, article, category, createdOn
                         from articles where articleid=($1)`;
+const findOneToDelete = `select articleId, title, article, category, createdOn,
+                        createdBy from articles where articleid=($1)`;
 const findAuthor = `select employeeid, firstname, email, jobRole, department 
                     from employee where employeeid=($1)`;
+const deleteArticle = `delete from articles where articleid = ($1)`;
 
-export default { createArticle, findOneArticle, findAuthor };
+export default {
+  createArticle,
+  findOneArticle,
+  findAuthor,
+  findOneToDelete,
+  deleteArticle
+};
