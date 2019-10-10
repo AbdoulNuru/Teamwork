@@ -103,7 +103,7 @@ describe('Teamwork article with database', () => {
       .set('Authorization', `Bearer ${token}`)
       .send({ title: 'new one', article: rt })
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(403);
         res.body.should.have.property(
           'error',
           'The article you are trying to edit is not found or you do not own it'
@@ -117,10 +117,38 @@ describe('Teamwork article with database', () => {
       .delete(`/api/v2/articles/${78}`)
       .set('Authorization', `Bearer ${token}`)
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(403);
         res.body.should.have.property(
           'error',
           'Article not found or you dont own the article'
+        );
+        done();
+      });
+  });
+
+  it('Should show a specific article', done => {
+    Chai.request(app)
+      .get(`/api/v2/articles/${1}`)
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Article retrieved successful'
+        );
+        done();
+      });
+  });
+
+  it('Should show a specific article', done => {
+    Chai.request(app)
+      .get(`/api/v2/articles/${123}`)
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property(
+          'error',
+          'No article found with the given id'
         );
         done();
       });
