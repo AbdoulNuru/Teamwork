@@ -7,6 +7,7 @@ import articleRoutes from './v1/routes/articles.route';
 import commentRoutes from './v1/routes/comments.route';
 import empRoutes from './v2/routes/auth.routes';
 import artRoutes from './v2/routes/article.routes';
+import comRoutes from './v2/routes/comment.routes';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/api/v1', articleRoutes);
 app.use('/api/v1', commentRoutes);
 app.use('/api/v2', empRoutes);
 app.use('/api/v2', artRoutes);
+app.use('/api/v2', comRoutes);
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Teamwork' });
 });

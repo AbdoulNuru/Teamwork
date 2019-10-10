@@ -2,10 +2,8 @@ const createArticle = ` insert into articles (
         title,
         article,
         category,
-        createdOn,
-        modifiedOn,
         createdBy
-    ) VALUES($1, $2, $3, $4, $5, $6) ON CONFLICT DO NOTHING returning *`;
+    ) VALUES($1, $2, $3, $4) ON CONFLICT DO NOTHING returning *`;
 
 const findOneArticle = `select articleId, title, article, category, createdOn
                         from articles where articleid=($1)`;

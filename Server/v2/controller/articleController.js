@@ -1,4 +1,3 @@
-import moment from 'moment';
 import conn from '../config/project.config';
 import articleQuery from '../models/article.query';
 import validate from '../helpers/articleValidation';
@@ -6,8 +5,7 @@ import arti from '../models/article.model';
 
 class articleController {
   static async createArticle(req, res) {
-    const { title, article, category, modifiedOn } = req.body;
-    const createdOn = moment().format('YYYY-MM-DD HH:mm:s');
+    const { title, article, category } = req.body;
     const createdBy = req.user.employeeId;
 
     const { error } = validate(arti(req));
@@ -22,8 +20,6 @@ class articleController {
       title,
       article,
       category,
-      createdOn,
-      modifiedOn,
       createdBy
     ]);
 

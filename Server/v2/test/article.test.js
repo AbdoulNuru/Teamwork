@@ -25,7 +25,7 @@ const article2 = {
 const token = tkn.generateToken(eml, 1);
 const wrongToken = tkn.generateToken(eml2, 35);
 
-describe('Teamwork with database', () => {
+describe('Teamwork article with database', () => {
   it('Should create an article', done => {
     Chai.request(app)
       .post('/api/v2/articles')
@@ -108,19 +108,6 @@ describe('Teamwork with database', () => {
           'error',
           'The article you are trying to edit is not found or you do not own it'
         );
-        done();
-      });
-  });
-
-  it('Should delete an article', done => {
-    Chai.request(app)
-      .delete(`/api/v2/articles/${1}`)
-      .set('Authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property('message', 'Article deleted');
-        res.body.data.should.have.property('articleid', 1);
-        res.body.data.should.have.property('category', 'music');
         done();
       });
   });
