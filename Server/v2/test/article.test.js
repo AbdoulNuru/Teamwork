@@ -80,21 +80,6 @@ describe('Teamwork with database', () => {
       });
   });
 
-<<<<<<< HEAD
-  it('Should update an existing article', done => {
-    Chai.request(app)
-      .patch(`/api/v2/articles/${1}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ title: 'new one', article: rt })
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property(
-          'message',
-          'Article modified successfully'
-        );
-        res.body.data.should.have.property('title', 'new one');
-        res.body.data.should.have.property('article', rt);
-=======
   it('Should delete an article', done => {
     Chai.request(app)
       .delete(`/api/v2/articles/${1}`)
@@ -104,32 +89,19 @@ describe('Teamwork with database', () => {
         res.body.should.have.property('message', 'Article deleted');
         res.body.data.should.have.property('articleid', 1);
         res.body.data.should.have.property('category', 'music');
->>>>>>> ft(endpoint): build delete article endpoint with database [Finishes #169054551]
         done();
       });
   });
 
-<<<<<<< HEAD
-  it('Should update an existing article', done => {
-    Chai.request(app)
-      .patch(`/api/v2/articles/${2}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ title: 'new one', article: rt })
-=======
   it("Should not delete an article that don't exist", done => {
     Chai.request(app)
       .delete(`/api/v2/articles/${78}`)
       .set('Authorization', `Bearer ${token}`)
->>>>>>> ft(endpoint): build delete article endpoint with database [Finishes #169054551]
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.have.property(
           'error',
-<<<<<<< HEAD
-          'The article you are trying to edit is not found or you do not own it'
-=======
           'Article not found or you dont own the article'
->>>>>>> ft(endpoint): build delete article endpoint with database [Finishes #169054551]
         );
         done();
       });
