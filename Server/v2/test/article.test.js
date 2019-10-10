@@ -153,4 +153,16 @@ describe('Teamwork article with database', () => {
         done();
       });
   });
+
+  it('Should show all article, showing the recent ones first', done => {
+    Chai.request(app)
+      .get('/api/v2/feeds')
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('message', 'All articles retrieved');
+        res.body.articles.should.be.a('array');
+        done();
+      });
+  });
 });

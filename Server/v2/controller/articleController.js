@@ -121,6 +121,23 @@ class articleController {
       error: 'No article found with the given id'
     });
   }
+
+  static async viewAll(req, res) {
+    const all = await conn.query(articleQuery.allArticles);
+
+    if (all.rowCount > 0) {
+      return res.status(200).json({
+        status: 200,
+        message: 'All articles retrieved',
+        articles: all.rows
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: 'It seems like there are no articles yet'
+    });
+  }
 }
 
 export default articleController;
