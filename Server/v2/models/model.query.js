@@ -16,15 +16,26 @@ const articleTable = `
                 title text,
                 article text,
                 category text,
-                createdOn date,
+                createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 modifiedOn date,
                 createdBy SERIAL,
                 foreign key(createdBy) REFERENCES employee ON DELETE CASCADE)`;
 
-const deleteTable = `DROP TABLE IF EXISTS employee, articles CASCADE;`;
+const commentTable = `
+        CREATE TABLE IF NOT EXISTS comments (
+                commentId SERIAL PRIMARY KEY,
+                comment text,
+                commentedOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                commentedBy SERIAL,
+                articleCommented SERIAL,
+                foreign key(commentedBy) REFERENCES employee,
+                foreign key(articleCommented) REFERENCES articles ON DELETE CASCADE)`;
+
+const deleteTable = `DROP TABLE IF EXISTS employee, articles, comments CASCADE;`;
 
 export default {
   userTable,
   articleTable,
+  commentTable,
   deleteTable
 };
