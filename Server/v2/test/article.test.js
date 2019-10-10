@@ -125,4 +125,32 @@ describe('Teamwork article with database', () => {
         done();
       });
   });
+
+  it('Should show a specific article', done => {
+    Chai.request(app)
+      .get(`/api/v2/articles/${1}`)
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Article retrieved successful'
+        );
+        done();
+      });
+  });
+
+  it('Should show a specific article', done => {
+    Chai.request(app)
+      .get(`/api/v2/articles/${123}`)
+      .set('Authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property(
+          'error',
+          'No article found with the given id'
+        );
+        done();
+      });
+  });
 });

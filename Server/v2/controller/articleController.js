@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import conn from '../config/project.config';
 import articleQuery from '../models/article.query';
 import validate from '../helpers/articleValidation';
 import arti from '../models/article.model';
+import commentQuery from '../models/comment.query';
 
 class articleController {
   static async createArticle(req, res) {
@@ -56,8 +58,8 @@ class articleController {
       });
     }
 
-    return res.status(404).json({
-      status: 404,
+    return res.status(403).json({
+      status: 403,
       error: 'Article not found or you dont own the article'
     });
   }
@@ -69,16 +71,8 @@ class articleController {
     const articleExist = await conn.query(articleQuery.findOneToUpdate, [
       articleId
     ]);
-
-    if (typeof title === 'undefined' || typeof article === 'undefined') {
-      return res.status(400).json({
-        status: 400,
-        error: 'The fields can not be updated to null'
-      });
-    }
-
-    const newTitle = title;
-    const newArticle = article;
+    const newTitle = title || articleExist.rows[0].title;
+    const newArticle = article || articleExist.rows[0].article;
     const creator = await conn.query(articleQuery.findAuthor, [loggedIn]);
     if (
       articleExist.rowCount > 0 &&
@@ -102,10 +96,29 @@ class articleController {
       });
     }
 
-    return res.status(404).json({
-      status: 404,
+    return res.status(403).json({
+      status: 403,
       error:
         'The article you are trying to edit is not found or you do not own it'
+    });
+  }
+
+  static async viewOneArticle(req, res) {
+    const aId = parseInt(req.params.articleId, 10);
+    const artFound = await conn.query(articleQuery.findOneToUpdate, [aId]);
+    const comFound = await conn.query(commentQuery.fetchComment, [aId]);
+
+    if (artFound.rowCount > 0) {
+      return res.status(200).json({
+        status: 200,
+        message: 'Article retrieved successful',
+        data: { articleDetails: artFound.rows[0], comments: comFound.rows }
+      });
+    }
+
+    return res.status(404).json({
+      status: 404,
+      error: 'No article found with the given id'
     });
   }
 }

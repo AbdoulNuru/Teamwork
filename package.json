@@ -57,5 +57,10 @@
     "nodemon": "^1.19.2",
     "pg": "^7.12.1",
     "uuid": "^3.3.3"
+  },
+  "nyc": {
+    "exclude": [
+      "Server/v2/config/*.js"
+    ]
   }
 }

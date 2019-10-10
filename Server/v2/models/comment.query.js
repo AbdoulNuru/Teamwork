@@ -3,5 +3,6 @@ const createComment = ` insert into comments (
         commentedBy,
         articleCommented
     ) VALUES($1, $2, $3) ON CONFLICT DO NOTHING returning *`;
+const fetchComment = `select * from comments where articlecommented=($1) `;
 
-export default { createComment };
+export default { createComment, fetchComment };
