@@ -8,6 +8,8 @@ Chai.should();
 
 const eml = 'karen@gmail.com';
 const eml2 = 'karen2@gmail.com';
+const rt =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
 const article = {
   title: 'Learn to play piano in few days',
   article:
@@ -74,6 +76,38 @@ describe('Teamwork with database', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('Should update an existing article', done => {
+    Chai.request(app)
+      .patch(`/api/v2/articles/${1}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: 'new one', article: rt })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property(
+          'message',
+          'Article modified successfully'
+        );
+        res.body.data.should.have.property('title', 'new one');
+        res.body.data.should.have.property('article', rt);
+        done();
+      });
+  });
+
+  it('Should update an existing article', done => {
+    Chai.request(app)
+      .patch(`/api/v2/articles/${2}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: 'new one', article: rt })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property(
+          'error',
+          'The article you are trying to edit is not found or you do not own it'
+        );
         done();
       });
   });
