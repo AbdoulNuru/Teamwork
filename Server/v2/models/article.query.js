@@ -17,6 +17,7 @@ const findOneToDelete = `select articleId, title, article, category, createdOn,
                         createdBy from articles where articleid=($1)`;
 const deleteArticle = `delete from articles where articleid = ($1)`;
 const allArticles = `select * from articles order by createdon desc`;
+const allByCategory = `select * from articles where category=($1)`;
 
 export default {
   createArticle,
@@ -26,5 +27,6 @@ export default {
   updateArticle,
   findOneToDelete,
   deleteArticle,
-  allArticles
+  allArticles,
+  allByCategory
 };

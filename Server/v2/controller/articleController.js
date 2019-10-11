@@ -138,6 +138,24 @@ class articleController {
       message: 'It seems like there are no articles yet'
     });
   }
+
+  static async viewByCategory(req, res) {
+    const { category } = req.params;
+    const allCat = await conn.query(articleQuery.allByCategory, [category]);
+
+    if (allCat.rowCount > 0) {
+      return res.status(200).json({
+        status: 200,
+        message: 'All articles in the category',
+        articles: allCat.rows
+      });
+    }
+
+    return res.status(200).json({
+      status: 200,
+      message: 'It seems like there are no articles by that categories'
+    });
+  }
 }
 
 export default articleController;
